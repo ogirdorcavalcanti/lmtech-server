@@ -1,0 +1,13 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Rodrigo <rodrigoccoelho30@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.16.2",
+    "eslint": "^8.39.0",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  }
+}
