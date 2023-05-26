@@ -1,11 +1,15 @@
-import * as express from "express"
-import { Request, Response } from "express"
-import Person from "@/Person"
+import express from "express"
+import { router } from "./routes/route"
+import dotenv from "dotenv"
+import cors from "cors"
 
+const PORT = process.env.PORT || 3000
 const app = express()
 
-app.get("/", (req: Request, res: Response) => {
-  res.send(new Person().sayHello())
-})
+// CONFIGURATION
+app.use(cors())
+dotenv.config()
+app.use(express.json())
+app.use(router)
 
-app.listen(3000, () => console.log("listening on port 3000!"))
+app.listen(PORT, () => console.log(`servidor rodando na porta ${PORT}`))
