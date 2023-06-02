@@ -1,4 +1,4 @@
-import { prismaClient } from "@/database/prismaCliente"
+import servicoService from "@/services/servico.service"
 import { Request, Response } from "express"
 
 export class GetServicoController {
@@ -6,16 +6,20 @@ export class GetServicoController {
     try {
       const { id } = request.params
 
-      const servicos = await prismaClient.servicos.findUnique({
-        where: {
-          id: String(id),
-        },
-      })
+      if (id === undefined) {
+        throw new Error("ID não fornecido")
+      }
 
-      return response.json(servicos)
+      const servico = await servicoService.getByIdService(id)
+
+      if (!servico) {
+        return response.status(400).send({ message: "serviço não encontrada!" })
+      }
+
+      return response.send(servico)
     } catch (error) {
       console.log(error)
-      return response.status(404).send({ error: "Serviço not found" })
+      return response.status(404).send({ error: "Serviço não encontrado" })
     }
   }
 }

@@ -11,6 +11,10 @@ import { GetServicoController } from "@/controllers/servicos/usecases/get/get.se
 import { GetAllServicosController } from "@/controllers/servicos/usecases/get.all/get.all.servicos.controller"
 import { GetOrdensController } from "@/controllers/ordens/usecases/get/get.ordens.controller"
 import { GetAllOrdensController } from "@/controllers/ordens/usecases/get.all/get.all.ordens.controller"
+import { updateClienteController } from "@/controllers/clientes/usecases/update/update.clientes.controller"
+import { UpdateAparelhoController } from "@/controllers/aparelhos/usecases/update/update.aparelhos.controller"
+import { updateOrdemController } from "@/controllers/ordens/usecases/update/update.ordem.controller"
+import { updateServicoController } from "@/controllers/servicos/usecases/update/update.servico.constroller"
 
 const router = Router()
 
@@ -25,8 +29,13 @@ const getAparelho = new GetAparelhosController()
 const getAllAparelhos = new GetAllAparelhosController()
 const getServico = new GetServicoController()
 const getAllServicos = new GetAllServicosController()
-const getOrden = new GetOrdensController()
+const getOrdem = new GetOrdensController()
 const getAllOrdens = new GetAllOrdensController()
+
+const updateCliente = new updateClienteController()
+const updateAparelho = new UpdateAparelhoController()
+const updateOrdem = new updateOrdemController()
+const updateServico = new updateServicoController()
 
 // POST
 
@@ -47,6 +56,13 @@ router.get("/servicos", getAllServicos.handle)
 router.get("/servico/:id", getServico.handle)
 
 router.get("/ordens", getAllOrdens.handle)
-router.get("/orden/:id", getOrden.handle)
+router.get("/ordem/:id", getOrdem.handle)
+
+// UPDATE
+
+router.patch("/cliente/:id", updateCliente.handle)
+router.patch("/aparelho/:id", updateAparelho.handle)
+router.patch("/ordem/:id", updateOrdem.handle)
+router.patch("/servico/:id", updateServico.handle)
 
 export { router }

@@ -16,6 +16,7 @@ model Clientes {
   sobreNome String
   email String @unique
   cel Int
+  observacao String
   aparelhos Aparelhos[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -1,12 +1,18 @@
-import { prismaClient } from "@/database/prismaCliente"
+import servicoService from "@/services/servico.service"
 import { Request, Response } from "express"
 
 export class GetAllServicosController {
   async handle(request: Request, response: Response) {
     try {
-      const servicos = await prismaClient.servicos.findMany()
+      const servicos = await servicoService.getAllService()
 
-      return response.status(200).send(servicos)
+      if (servicos.length === 0) {
+        return response
+          .status(400)
+          .send({ message: "Não há serviços cadastrados" })
+      }
+
+      return response.send(servicos)
     } catch (error) {
       console.log(error)
       return response.status(404).send({ error: "Erro ao buscar servicços" })

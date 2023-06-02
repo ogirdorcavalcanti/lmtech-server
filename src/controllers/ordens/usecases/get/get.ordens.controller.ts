@@ -1,4 +1,4 @@
-import { prismaClient } from "@/database/prismaCliente"
+import ordensService from "@/services/ordens.service"
 import { Request, Response } from "express"
 
 export class GetOrdensController {
@@ -6,16 +6,20 @@ export class GetOrdensController {
     try {
       const { id } = request.params
 
-      const ordens = await prismaClient.ordens.findUnique({
-        where: {
-          id: String(id),
-        },
-      })
+      if (id === undefined) {
+        throw new Error("ID não fornecido")
+      }
 
-      return response.json(ordens)
+      const ordem = await ordensService.getByIdService(id)
+
+      if (!ordem) {
+        return response.status(400).send({ message: "ordem não encontrada!" })
+      }
+
+      return response.send(ordem)
     } catch (error) {
       console.log(error)
-      return response.status(404).send({ error: "Orden not found" })
+      return response.status(404).send({ error: "Orden não encontrada!" })
     }
   }
 }
