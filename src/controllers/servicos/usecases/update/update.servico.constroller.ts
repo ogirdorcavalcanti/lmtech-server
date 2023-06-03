@@ -1,5 +1,6 @@
 import servicoService from "@/services/servico.service"
 import { Request, Response } from "express"
+import validate from "uuid-validate"
 
 export class updateServicoController {
   async handle(request: Request, response: Response) {
@@ -14,8 +15,8 @@ export class updateServicoController {
 
       const id = request.params.id
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
+      if (!validate(id)) {
+        throw new Error("ID inválido")
       }
 
       const servico = await servicoService.getByIdService(id)

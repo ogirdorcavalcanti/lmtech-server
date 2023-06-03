@@ -1,13 +1,14 @@
 import aparelhoService from "@/services/aparelho.service"
 import { Request, Response } from "express"
+import validate from "uuid-validate"
 
 export class GetAparelhosController {
   async handle(request: Request, response: Response) {
     try {
       const { id } = request.params
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
+      if (!validate(id)) {
+        throw new Error("ID inválido")
       }
 
       const aparelhos = await aparelhoService.getByIdService(id)

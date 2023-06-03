@@ -1,5 +1,6 @@
 import ordensService from "@/services/ordens.service"
 import { Request, Response } from "express"
+import validate from "uuid-validate"
 
 export class updateOrdemController {
   async handle(request: Request, response: Response) {
@@ -14,8 +15,8 @@ export class updateOrdemController {
 
       const id = request.params.id
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
+      if (!validate(id)) {
+        throw new Error("ID inválido")
       }
 
       const ordem = await ordensService.getByIdService(id)

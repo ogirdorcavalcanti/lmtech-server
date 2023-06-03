@@ -1,13 +1,14 @@
 import clientesService from "@/services/clientes.service"
 import { Request, Response } from "express"
+import validate from "uuid-validate"
 
 export class GetClientesController {
   async handle(request: Request, response: Response) {
     try {
       const { id } = request.params
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
+      if (!validate(id)) {
+        throw new Error("ID inválido")
       }
 
       const clientes = await clientesService.getByIdService(id)
