@@ -15,6 +15,16 @@ import { updateClienteController } from "@/controllers/clientes/usecases/update/
 import { UpdateAparelhoController } from "@/controllers/aparelhos/usecases/update/update.aparelhos.controller"
 import { updateOrdemController } from "@/controllers/ordens/usecases/update/update.ordem.controller"
 import { updateServicoController } from "@/controllers/servicos/usecases/update/update.servico.constroller"
+import {
+  validAparelho,
+  validCliente,
+  validIdAparelho,
+  validIdCliente,
+  validIdOrdens,
+  validIdSevicos,
+  validOrdens,
+  validServico,
+} from "@/middlewares/global.middlewares"
 
 const router = Router()
 
@@ -47,22 +57,27 @@ router.post("/servico", createServico.handle)
 // GET
 
 router.get("/clientes", getAllClientes.handle)
-router.get("/cliente/:id", getClientes.handle)
+router.get("/cliente/:id", validIdCliente, validCliente, getClientes.handle)
 
 router.get("/aparelhos", getAllAparelhos.handle)
-router.get("/aparelho/:id", getAparelho.handle)
+router.get("/aparelho/:id", validIdAparelho, validAparelho, getAparelho.handle)
 
 router.get("/servicos", getAllServicos.handle)
-router.get("/servico/:id", getServico.handle)
+router.get("/servico/:id", validIdSevicos, validServico, getServico.handle)
 
 router.get("/ordens", getAllOrdens.handle)
-router.get("/ordem/:id", getOrdem.handle)
+router.get("/ordem/:id", validIdOrdens, validOrdens, getOrdem.handle)
 
 // UPDATE
 
 router.patch("/cliente/:id", updateCliente.handle)
-router.patch("/aparelho/:id", updateAparelho.handle)
-router.patch("/ordem/:id", updateOrdem.handle)
-router.patch("/servico/:id", updateServico.handle)
+router.patch(
+  "/aparelho/:id",
+  validIdCliente,
+  validCliente,
+  updateAparelho.handle
+)
+router.patch("/ordem/:id", validIdOrdens, validOrdens, updateOrdem.handle)
+router.patch("/servico/:id", validIdSevicos, validServico, updateServico.handle)
 
 export { router }

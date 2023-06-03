@@ -15,18 +15,6 @@ export class UpdateAparelhoController {
 
       const id = request.params.id
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
-      }
-
-      const aparelho = await aparelhoService.getByIdService(id)
-
-      if (!aparelho) {
-        return response
-          .status(400)
-          .send({ message: "Aparelho não foi encontrado!" })
-      }
-
       await aparelhoService.updateService(
         id,
         marca,

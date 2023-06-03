@@ -6,15 +6,7 @@ export class GetOrdensController {
     try {
       const { id } = request.params
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
-      }
-
       const ordem = await ordensService.getByIdService(id)
-
-      if (!ordem) {
-        return response.status(400).send({ message: "ordem não encontrada!" })
-      }
 
       return response.send(ordem)
     } catch (error) {

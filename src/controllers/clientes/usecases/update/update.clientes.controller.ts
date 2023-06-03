@@ -14,16 +14,6 @@ export class updateClienteController {
 
       const id = request.params.id
 
-      if (id === undefined) {
-        throw new Error("ID não fornecido")
-      }
-
-      const cliente = await clientesService.getByIdService(id)
-
-      if (!cliente) {
-        return response.status(400).send({ message: "cliente não encontrado!" })
-      }
-
       await clientesService.updateService(
         id,
         nome,
