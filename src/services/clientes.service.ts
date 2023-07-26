@@ -14,7 +14,7 @@ const updateService = async (
   nome: string,
   sobreNome: string,
   email: string,
-  cel: number,
+  cel: string,
   observacao: string
 ) =>
   prismaClient.clientes.update({
@@ -22,9 +22,16 @@ const updateService = async (
     data: { nome, sobreNome, email, cel, observacao },
   })
 
+const deleteService = async (id: string) => {
+  await prismaClient.clientes.delete({
+    where: { id: id },
+  })
+}
+
 export = {
   createService,
   getAllService,
   getByIdService,
   updateService,
+  deleteService,
 }

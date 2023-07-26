@@ -3,7 +3,7 @@ import { router } from "./routes/route"
 import dotenv from "dotenv"
 import cors from "cors"
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 6000
 const app = express()
 
 // CONFIGURATION

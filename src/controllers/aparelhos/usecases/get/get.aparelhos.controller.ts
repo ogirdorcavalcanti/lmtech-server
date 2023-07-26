@@ -7,17 +7,7 @@ export class GetAparelhosController {
     try {
       const { id } = request.params
 
-      // if (!validate(id)) {
-      //   throw new Error("ID inválido")
-      // }
-
       const aparelhos = await aparelhoService.getByIdService(id)
-
-      // if (!aparelhos) {
-      //   return response
-      //     .status(400)
-      //     .send({ message: "aparelho não encontrado!" })
-      // }
 
       return response.send(aparelhos)
     } catch (error) {

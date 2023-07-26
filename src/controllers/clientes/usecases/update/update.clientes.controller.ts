@@ -12,7 +12,7 @@ export class updateClienteController {
         })
       }
 
-      const id = request.params.id
+      const { id } = request.params
 
       await clientesService.updateService(
         id,
@@ -26,7 +26,7 @@ export class updateClienteController {
       response.send({ message: "cliente atualizado com sucesso!" })
     } catch (error) {
       console.log(error)
-      return response.status(404).send({ error: "Cliente não encontrados" })
+      return response.status(404).send({ error: "Cliente não encontrado" })
     }
   }
 }

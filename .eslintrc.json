@@ -20,5 +20,5 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "error"
   },
-  "ignorePatterns": ["dist/index.js", "dist/index.spec.js"]
+  "ignorePatterns": ["build/index.js", "build/index.spec.js"]
 }

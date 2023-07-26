@@ -1,30 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add uuid-validate-es6
+  /home/rodrigo/.nvm/versions/node/v14.7.0/bin/node /mnt/c/Users/Usuario/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js add rimraf 14.7.0
 
 PATH: 
-  C:\Python311\Scripts\;C:\Python311\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\GitHub CLI\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\GitHub CLI\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Usuario\AppData\Local\Microsoft\WindowsApps;;C:\Users\Usuario\AppData\Local\Programs\Microsoft VS Code\bin;D:\Projetos de Programação\web;C:\Users\Usuario\AppData\Roaming\npm
+  /home/rodrigo/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/bin/remote-cli:/home/rodrigo/.nvm/versions/node/v14.7.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Python311/Scripts/:/mnt/c/Python311/:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/GitHub CLI/:/mnt/c/Program Files/nodejs/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Users/Usuario/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Usuario/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Usuario/AppData/Roaming/npm:/mnt/c/Users/Usuario/AppData/Local/Microsoft/WindowsApps:/snap/bin
 
 Yarn version: 
   1.22.19
 
 Node version: 
-  18.16.0
+  14.7.0
 
 Platform: 
-  win32 x64
+  linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/uuid-validate-es6: Not found
-      at params.callback [as _callback] (C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
-      at self.callback (C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
-      at Request.emit (node:events:513:28)
-      at Request.<anonymous> (C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
-      at Request.emit (node:events:513:28)
-      at IncomingMessage.<anonymous> (C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
-      at Object.onceWrapper (node:events:627:28)
-      at IncomingMessage.emit (node:events:525:35)
-      at endReadableNT (node:internal/streams/readable:1359:12)
-      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+  Error: https://registry.yarnpkg.com/14.7.0: Not found
+      at Request.params.callback [as _callback] (/mnt/c/Users/Usuario/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:66145:18)
+      at Request.self.callback (/mnt/c/Users/Usuario/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:140890:22)
+      at Request.emit (events.js:314:20)
+      at Request.<anonymous> (/mnt/c/Users/Usuario/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:141862:10)
+      at Request.emit (events.js:314:20)
+      at IncomingMessage.<anonymous> (/mnt/c/Users/Usuario/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (events.js:420:28)
+      at IncomingMessage.emit (events.js:326:22)
+      at endReadableNT (_stream_readable.js:1244:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -32,14 +32,16 @@ npm manifest:
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-      "build": "tsc && tsc-alias",
+      "build": "rimraf ./build && tsc",
       "start": "node dist/index.js",
       "start:dev": "nodemon --watch 'src/' --exec ts-node -r tsconfig-paths/register src/index.ts -e ts",
       "husky:prepare": "husky install",
       "test": "jest --passWithNoTests",
       "test:watch": "yarn test --watch",
       "test:staged": "yarn test --findRelatedTests",
-      "test:push": "yarn test --coverage"
+      "test:push": "yarn test --coverage",
+      "prisma:db:push": "prisma db push",
+      "prisma:migrate": "prisma migrate"
     },
     "author": "Rodrigo <rodrigoccoelho30@gmail.com>",
     "license": "MIT",
@@ -74,7 +76,8 @@ npm manifest:
       "@prisma/client": "^4.13.0",
       "@types/cors": "^2.8.13",
       "cors": "^2.8.5",
-      "express": "^4.18.2"
+      "express": "^4.18.2",
+      "uuid-validate": "^0.0.3"
     }
   }
 
@@ -4735,6 +4738,11 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
     integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+  
+  uuid-validate@^0.0.3:
+    version "0.0.3"
+    resolved "https://registry.yarnpkg.com/uuid-validate/-/uuid-validate-0.0.3.tgz#e30617f75dc742a0e4f95012a11540faf9d39ab4"
+    integrity sha512-Fykw5U4eZESbq739BeLvEBFRuJODfrlmjx5eJux7W817LjRaq4b7/i4t2zxQmhcX+fAj4nMfRdTzO4tmwLKn0w==
   
   v8-compile-cache-lib@^3.0.1:
     version "3.0.1"

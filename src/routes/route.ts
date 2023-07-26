@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createClienteController } from "@/controllers/clientes/usecases/create/create.clientes.controller"
+import { createClienteController } from "@/controllers/clientes/usecases/create/create.cliente.controller"
 import { createAparelhoController } from "@/controllers/aparelhos/usecases/create/create.aparelhos.controlller"
 import { createOrdensController } from "@/controllers/ordens/usecases/create/create.ordens.controller"
 import { GetClientesController } from "@/controllers/clientes/usecases/get/get.clientes.controller"
@@ -25,6 +25,7 @@ import {
   validOrdens,
   validServico,
 } from "@/middlewares/global.middlewares"
+import { deleteClienteController } from "@/controllers/clientes/usecases/delete/delete.clientes.controller"
 
 const router = Router()
 
@@ -46,6 +47,8 @@ const updateCliente = new updateClienteController()
 const updateAparelho = new UpdateAparelhoController()
 const updateOrdem = new updateOrdemController()
 const updateServico = new updateServicoController()
+
+const deleteCliente = new deleteClienteController()
 
 // POST
 
@@ -79,5 +82,7 @@ router.patch(
 )
 router.patch("/ordem/:id", validIdOrdens, validOrdens, updateOrdem.handle)
 router.patch("/servico/:id", validIdSevicos, validServico, updateServico.handle)
+
+router.delete("/cliente/:id", deleteCliente.handle)
 
 export { router }

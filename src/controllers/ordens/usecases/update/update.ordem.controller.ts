@@ -12,7 +12,7 @@ export class updateOrdemController {
         })
       }
 
-      const id = request.params.id
+      const { id } = request.params
 
       await ordensService.updateService(id, conclusao)
 

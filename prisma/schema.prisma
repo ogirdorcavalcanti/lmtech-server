@@ -1,62 +1,55 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Clientes {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  nome String
-  sobreNome String
-  email String @unique
-  cel Int
+  id         String      @id @default(uuid())
+  nome       String
+  sobreNome  String
+  email      String      @unique
+  cel        String
   observacao String
-  aparelhos Aparelhos[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  aparelhos  Aparelhos[]
 }
-
 
 model Aparelhos {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  marca String
-  modelo String
-  memoria String
-  hd  Int
-  placaMae Int
+  id         String    @id @default(uuid())
+  marca      String
+  modelo     String
+  memoria    String
+  hd         Int
+  placaMae   Int
   carregador Boolean
-  bateria Boolean
-  clientes Clientes? @relation(fields: [clientesId], references: [id]) 
-  clientesId  String?  @db.ObjectId
-  ordens Ordens[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  bateria    Boolean
+  clientesId String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  clientes   Clientes? @relation(fields: [clientesId], references: [id])
+  ordens     Ordens[]
 }
 
-
 model Ordens {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  conclusao String
-  aparelhos Aparelhos? @relation(fields: [aparelhosId], references: [id])
-  aparelhosId String? @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String     @id @default(uuid())
+  conclusao   String
+  aparelhosId String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  aparelhos   Aparelhos? @relation(fields: [aparelhosId], references: [id])
 }
 
 model Servicos {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-
-  name String
+  id          String   @id @default(uuid())
+  name        String
   description String
-  price Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  price       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
-
