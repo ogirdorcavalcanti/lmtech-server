@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { createClienteController } from "@/controllers/clientes/usecases/create/create.cliente.controller"
-import { createAparelhoController } from "@/controllers/aparelhos/usecases/create/create.aparelhos.controlller"
+import { createAparelhoController } from "@/controllers/aparelhos/usecases/create/create.aparelhos.controller"
 import { createOrdensController } from "@/controllers/ordens/usecases/create/create.ordens.controller"
 import { GetClientesController } from "@/controllers/clientes/usecases/get/get.clientes.controller"
 import { GetAparelhosController } from "@/controllers/aparelhos/usecases/get/get.aparelhos.controller"
@@ -26,6 +26,9 @@ import {
   validServico,
 } from "@/middlewares/global.middlewares"
 import { deleteClienteController } from "@/controllers/clientes/usecases/delete/delete.clientes.controller"
+import { deleteAparelhoController } from "@/controllers/aparelhos/usecases/delete/delete.aparelhos.controller"
+import { deleteServicoController } from "../controllers/servicos/usecases/delete/delete.servicos.controller"
+import { deleteOrdemController } from "@/controllers/ordens/usecases/delete/delete.ordens.controller"
 
 const router = Router()
 
@@ -49,6 +52,9 @@ const updateOrdem = new updateOrdemController()
 const updateServico = new updateServicoController()
 
 const deleteCliente = new deleteClienteController()
+const deleteAparelho = new deleteAparelhoController()
+const deleteServico = new deleteServicoController()
+const deleteOrdem = new deleteOrdemController()
 
 // POST
 
@@ -74,15 +80,13 @@ router.get("/ordem/:id", validIdOrdens, validOrdens, getOrdem.handle)
 // UPDATE
 
 router.patch("/cliente/:id", updateCliente.handle)
-router.patch(
-  "/aparelho/:id",
-  validIdCliente,
-  validCliente,
-  updateAparelho.handle
-)
+router.patch("/aparelho/:id", updateAparelho.handle)
 router.patch("/ordem/:id", validIdOrdens, validOrdens, updateOrdem.handle)
 router.patch("/servico/:id", validIdSevicos, validServico, updateServico.handle)
 
 router.delete("/cliente/:id", deleteCliente.handle)
+router.delete("/aparelho/:id", deleteAparelho.handle)
+router.delete("/servico/:id", deleteServico.handle)
+router.delete("/ordem/:id", deleteOrdem.handle)
 
 export { router }

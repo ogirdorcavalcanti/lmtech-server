@@ -15,9 +15,11 @@ model Clientes {
   email      String      @unique
   cel        String
   observacao String
+  aparelhosId String?
+  aparelhos   Aparelhos? @relation(fields: [aparelhosId], references: [id])
+  ordens     Ordens[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  aparelhos  Aparelhos[]
 }
 
 model Aparelhos {
@@ -25,31 +27,54 @@ model Aparelhos {
   marca      String
   modelo     String
   memoria    String
-  hd         Int
-  placaMae   Int
+  hd         String
+  placaMae   String
   carregador Boolean
   bateria    Boolean
+  caracteristicas String
+  equipamento String
+  problema String
+  numerodeSerie String
+  observacaoRecebimento String
   clientesId String?
+  ordens     Ordens[]
+  clientes Clientes[]
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  clientes   Clientes? @relation(fields: [clientesId], references: [id])
-  ordens     Ordens[]
+ 
+
 }
 
 model Ordens {
   id          String     @id @default(uuid())
+  Counter Int @default(autoincrement())
   conclusao   String
   aparelhosId String?
+  aparelhos   Aparelhos? @relation(fields: [aparelhosId], references: [id])
+  clientesId String?
+  clientes  Clientes? @relation(fields: [clientesId], references: [id])
+  servicosId String?
+  servicos  Servicos? @relation(fields: [servicosId], references: [id])
+  numeroOs String
+  dataEntrada DateTime
+  dataPrevista DateTime
+  dataSaida DateTime
+  valorFrete String
+  totalServicos String
+  totalPecas String
+  totalOrdem String
+  observacaoServico String
+  observacaoInterna String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  aparelhos   Aparelhos? @relation(fields: [aparelhosId], references: [id])
 }
 
 model Servicos {
   id          String   @id @default(uuid())
   name        String
   description String
-  price       Int
+  price       String
+  ordens     Ordens[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

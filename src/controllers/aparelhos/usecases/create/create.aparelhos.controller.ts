@@ -4,8 +4,20 @@ import aparelhoService from "@/services/aparelho.service"
 class createAparelhoController {
   async handle(request: Request, response: Response) {
     try {
-      const { marca, modelo, memoria, hd, placaMae, carregador, bateria } =
-        request.body
+      const {
+        marca,
+        modelo,
+        memoria,
+        hd,
+        placaMae,
+        carregador,
+        bateria,
+        caracteristicas,
+        equipamento,
+        problema,
+        numerodeSerie,
+        observacaoRecebimento,
+      } = request.body
 
       if (!marca || !modelo || !placaMae) {
         response
@@ -30,6 +42,11 @@ class createAparelhoController {
           placaMae,
           carregador,
           bateria,
+          caracteristicas,
+          equipamento,
+          problema,
+          numerodeSerie,
+          observacaoRecebimento,
         },
       })
     } catch (err) {

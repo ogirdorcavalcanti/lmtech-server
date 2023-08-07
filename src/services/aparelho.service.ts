@@ -14,19 +14,44 @@ const updateService = async (
   marca: string,
   modelo: string,
   memoria: string,
-  hd: number,
-  placaMae: number,
+  hd: string,
+  placaMae: string,
   carregador: boolean,
-  bateria: boolean
+  bateria: boolean,
+  caracteristicas: string,
+  equipamento: string,
+  problema: string,
+  numerodeSerie: string,
+  observacaoRecebimento: string
 ) =>
   prismaClient.aparelhos.update({
     where: { id: id },
-    data: { marca, modelo, memoria, hd, placaMae, carregador, bateria },
+    data: {
+      marca,
+      modelo,
+      memoria,
+      hd,
+      placaMae,
+      carregador,
+      bateria,
+      caracteristicas,
+      equipamento,
+      problema,
+      numerodeSerie,
+      observacaoRecebimento,
+    },
   })
+
+const deleteService = async (id: string) => {
+  await prismaClient.aparelhos.delete({
+    where: { id: id },
+  })
+}
 
 export = {
   createService,
   getAllService,
   getByIdService,
   updateService,
+  deleteService,
 }

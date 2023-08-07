@@ -1,6 +1,5 @@
 import aparelhoService from "@/services/aparelho.service"
 import { Request, Response } from "express"
-// import validate from "uuid-validate"
 
 export class GetAparelhosController {
   async handle(request: Request, response: Response) {

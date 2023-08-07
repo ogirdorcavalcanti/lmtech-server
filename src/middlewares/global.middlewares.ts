@@ -14,7 +14,6 @@ const validIdAparelho = async (
 
   const { id } = request.params
 
-
   const record = await prisma.aparelhos.findUnique({
     where: { id },
   })
@@ -37,7 +36,7 @@ const validAparelho = async (
 
   const aparelho = await aparelhoService.getByIdService(id)
 
-  if (aparelho) {
+  if (!aparelho) {
     return response.status(400).send({ message: "aparelhos não encontrado!" })
   }
 
@@ -71,7 +70,6 @@ const validCliente = async (
   response: Response,
   next: NextFunction
 ) => {
-
   const { id } = request.params
 
   const clientes = await clientesService.getByIdService(id)
@@ -129,7 +127,6 @@ const validIdOrdens = async (
   const prisma = new PrismaClient()
 
   const { id } = request.params
-
 
   const clientesId = await prisma.ordens.findUnique({
     where: { id },

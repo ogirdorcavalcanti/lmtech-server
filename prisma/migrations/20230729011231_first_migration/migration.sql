@@ -1,11 +1,12 @@
 -- CreateTable
 CREATE TABLE "Clientes" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
     "sobreNome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "cel" INTEGER NOT NULL,
+    "cel" TEXT NOT NULL,
     "observacao" TEXT NOT NULL,
+    "aparelhosId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -14,15 +15,18 @@ CREATE TABLE "Clientes" (
 
 -- CreateTable
 CREATE TABLE "Aparelhos" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "marca" TEXT NOT NULL,
     "modelo" TEXT NOT NULL,
     "memoria" TEXT NOT NULL,
-    "hd" INTEGER NOT NULL,
-    "placaMae" INTEGER NOT NULL,
+    "hd" TEXT NOT NULL,
+    "placaMae" TEXT NOT NULL,
     "carregador" BOOLEAN NOT NULL,
     "bateria" BOOLEAN NOT NULL,
-    "clientesId" INTEGER,
+    "caracteristicas" TEXT NOT NULL,
+    "defeito" TEXT NOT NULL,
+    "observacao" TEXT NOT NULL,
+    "clientesId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -31,9 +35,12 @@ CREATE TABLE "Aparelhos" (
 
 -- CreateTable
 CREATE TABLE "Ordens" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
+    "Counter" SERIAL NOT NULL,
     "conclusao" TEXT NOT NULL,
-    "aparelhosId" INTEGER,
+    "aparelhosId" TEXT,
+    "clientesId" TEXT,
+    "servicosId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -42,10 +49,10 @@ CREATE TABLE "Ordens" (
 
 -- CreateTable
 CREATE TABLE "Servicos" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "price" INTEGER NOT NULL,
+    "price" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -56,7 +63,13 @@ CREATE TABLE "Servicos" (
 CREATE UNIQUE INDEX "Clientes_email_key" ON "Clientes"("email");
 
 -- AddForeignKey
-ALTER TABLE "Aparelhos" ADD CONSTRAINT "Aparelhos_clientesId_fkey" FOREIGN KEY ("clientesId") REFERENCES "Clientes"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Clientes" ADD CONSTRAINT "Clientes_aparelhosId_fkey" FOREIGN KEY ("aparelhosId") REFERENCES "Aparelhos"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Ordens" ADD CONSTRAINT "Ordens_aparelhosId_fkey" FOREIGN KEY ("aparelhosId") REFERENCES "Aparelhos"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Ordens" ADD CONSTRAINT "Ordens_clientesId_fkey" FOREIGN KEY ("clientesId") REFERENCES "Clientes"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Ordens" ADD CONSTRAINT "Ordens_servicosId_fkey" FOREIGN KEY ("servicosId") REFERENCES "Servicos"("id") ON DELETE SET NULL ON UPDATE CASCADE;

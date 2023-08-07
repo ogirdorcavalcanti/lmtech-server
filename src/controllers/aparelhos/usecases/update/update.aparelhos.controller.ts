@@ -4,8 +4,20 @@ import { Request, Response } from "express"
 export class UpdateAparelhoController {
   async handle(request: Request, response: Response) {
     try {
-      const { marca, modelo, memoria, hd, placaMae, carregador, bateria } =
-        request.body
+      const {
+        marca,
+        modelo,
+        memoria,
+        hd,
+        placaMae,
+        carregador,
+        bateria,
+        caracteristicas,
+        equipamento,
+        problema,
+        numerodeSerie,
+        observacaoRecebimento,
+      } = request.body
 
       if (!marca && !modelo && !placaMae) {
         return response.status(400).send({
@@ -23,7 +35,12 @@ export class UpdateAparelhoController {
         hd,
         placaMae,
         carregador,
-        bateria
+        bateria,
+        caracteristicas,
+        equipamento,
+        problema,
+        numerodeSerie,
+        observacaoRecebimento
       )
 
       return response.send({ message: "Aparelho atualizado com sucesso!" })
